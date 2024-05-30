@@ -1,7 +1,4 @@
-import 'dart:developer';
-
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app_rv/domain/model/news_model.dart';
 import 'package:news_app_rv/infrastructure/db/hive_db_service.dart';
 
@@ -22,9 +19,7 @@ class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
       final status = await HiveDB().addToFav(news: event.news);
 
       if (status) {
-        log('added succes to favs');
-      } else {
-        log('not added succes to favs');
+        add(GetAllFavorites());
       }
     });
 
@@ -32,13 +27,7 @@ class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
       final status = await HiveDB().removeFromFav(id: event.id);
 
       if (status) {
-        log('delete success in bloc');
-
-        final favs = await HiveDB().getAllFavorites();
-
-        emit(FavoritesSuccess(favlist: favs));
-      } else {
-        log('delete no success b01');
+        add(GetAllFavorites());
       }
     });
   }

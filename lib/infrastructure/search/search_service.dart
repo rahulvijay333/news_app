@@ -13,9 +13,8 @@ class SearchService {
       final Response response = await Dio().get(
         '${ApiEndPoints.searchNews}q=$searchKey&apiKey=$apiKey',
       );
-      
+
       if (response.statusCode == 200) {
-      
         return (null, NewsModel.fromMap(response.data));
       } else {
         return ('Error occured while connecting to server', null);
@@ -25,7 +24,6 @@ class SearchService {
         if (e.error is SocketException) {
           return ('Check Internet connectivity', null);
         } else {
-          log(e.message.toString());
           return ('Try lator, server connection failed', null);
         }
       } else {

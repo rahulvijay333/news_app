@@ -1,8 +1,5 @@
-import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:news_app_rv/application/favourites/favourites_bloc.dart';
@@ -22,11 +19,10 @@ class ScreenDetails extends StatelessWidget {
     final date = CustomDateTimeFormatter.newsDateTimeFormat(
         dateTime: article.publishedAt!.toString());
 
-    log(article.url.toString());
-
     return Scaffold(
       appBar: AppBar(
         title: const Text(''),
+        surfaceTintColor: Colors.transparent,
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 16.0, right: 16),
@@ -51,9 +47,9 @@ class ScreenDetails extends StatelessWidget {
                       valueListenable: HiveDB().hiveBox.listenable(),
                       builder: (context, value, child) {
                         if (value.containsKey(article.url)) {
-                          return const Icon(
+                          return Icon(
                             Icons.favorite,
-                            color: Colors.red,
+                            color: Colors.red.shade900,
                           );
                         } else {
                           return const Icon(
@@ -67,7 +63,10 @@ class ScreenDetails extends StatelessWidget {
             space10,
             Text(
               article.title ?? '',
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+              ),
             ),
             space15,
             SizedBox(
@@ -114,11 +113,11 @@ class ScreenDetails extends StatelessWidget {
                     await launch(url);
                   }
                 } catch (e) {
-                 if(context.mounted) {
-                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      duration: Duration(seconds: 2),
-                      content: Text('Link not able to open via web brower')));
-                 }
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        duration: Duration(seconds: 2),
+                        content: Text('Link not able to open via web brower')));
+                  }
                 }
               },
               child: Container(

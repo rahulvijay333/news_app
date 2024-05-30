@@ -17,7 +17,6 @@ class NewsTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-     
       children: [
         GestureDetector(
           onTap: () {
@@ -31,7 +30,7 @@ class NewsTileWidget extends StatelessWidget {
           },
           child: Container(
             decoration: BoxDecoration(
-                border: Border.all(color: Colors.black.withOpacity(0.5)),
+                border: Border.all(color: Colors.black.withOpacity(0.2)),
                 borderRadius: BorderRadius.circular(15)),
             padding: const EdgeInsets.all(12),
             child: Column(
@@ -45,29 +44,37 @@ class NewsTileWidget extends StatelessWidget {
                   child: newsList.urlToImage != null
                       ? ClipRRect(
                           borderRadius: BorderRadius.circular(8),
-                          child: newsList.urlToImage != null? Image.network(
-                            newsList.urlToImage,
-                            fit: BoxFit.cover,
-                                 loadingBuilder: (context, child, loadingProgress) {
-                          if (loadingProgress == null) {
-                            return child;
-                          }
-                          return const Center(
-                            child: CircularProgressIndicator(
-                              strokeWidth: 1,
-                              color: Colors.deepPurple,
-                            ),
-                          );
-                        },
-                        errorBuilder: (context, error, stackTrace) {
-                          return Image.asset(
+                          child: newsList.urlToImage != null
+                              ? Image.network(
+                                  newsList.urlToImage,
+                                  fit: BoxFit.cover,
+                                  loadingBuilder:
+                                      (context, child, loadingProgress) {
+                                    if (loadingProgress == null) {
+                                      return child;
+                                    }
+                                    return const Center(
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 1,
+                                        color: Colors.deepPurple,
+                                      ),
+                                    );
+                                  },
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Image.asset(
+                                      'assets/image_placeholder.png',
+                                      fit: BoxFit.cover,
+                                    );
+                                  },
+                                )
+                              : Image.asset('assets/image_placeholder.png'),
+                        )
+                      : ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.asset(
                             'assets/image_placeholder.png',
                             fit: BoxFit.cover,
-                          );
-                        },
-                          ): Image.asset('assets/image_placeholder.png'),
-                        )
-                      : Image.asset('assets/image_placeholder.png'),
+                          )),
                 ),
                 const SizedBox(
                   height: 5,

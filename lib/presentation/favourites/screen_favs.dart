@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app_rv/application/favourites/favourites_bloc.dart';
 import 'package:news_app_rv/core/common/dateformat.dart';
@@ -14,7 +12,7 @@ class ScreenFavourites extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(surfaceTintColor: Colors.transparent,
         title: const Text('Favourites'),
         centerTitle: true,
       ),

@@ -16,9 +16,15 @@ class ScreenSearch extends StatelessWidget {
     final size = MediaQuery.sizeOf(context);
     return Scaffold(
       appBar: AppBar(
+        surfaceTintColor: Colors.transparent,
         automaticallyImplyLeading: false,
         title: CupertinoSearchTextField(
           autofocus: true,
+          placeholder: 'Search news ...',
+          decoration: BoxDecoration(
+              color: Colors.purple.shade50,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(width: 0.1)),
           controller: searchController,
           padding: const EdgeInsets.all(15),
           suffixIcon: const Icon(Icons.clear),
@@ -26,15 +32,13 @@ class ScreenSearch extends StatelessWidget {
             searchController.clear();
           },
           onSubmitted: (value) {
-            log('search pressed');
-
             BlocProvider.of<SearchBloc>(context)
                 .add(SearchNewsEvent(searchKey: searchController.text.trim()));
           },
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 16.0, right: 16),
+        padding: const EdgeInsets.only(left: 16.0, right: 16, top: 10),
         child: BlocConsumer<SearchBloc, SearchState>(
           listener: (context, state) {},
           builder: (context, state) {

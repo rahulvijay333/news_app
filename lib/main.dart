@@ -8,7 +8,6 @@ import 'package:news_app_rv/domain/model/news_model.dart';
 import 'package:news_app_rv/infrastructure/db/hive_db_service.dart';
 import 'package:news_app_rv/infrastructure/home/home_service.dart';
 import 'package:news_app_rv/infrastructure/search/search_service.dart';
-import 'package:news_app_rv/presentation/home/screen_home.dart';
 import 'package:news_app_rv/presentation/splash/screen_splash.dart';
 
 void main(List<String> args) async {
@@ -20,13 +19,9 @@ void main(List<String> args) async {
     Hive.registerAdapter(ArticleAdapter());
   }
 
-   if (!Hive.isAdapterRegistered(SourceAdapter().typeId)) {
+  if (!Hive.isAdapterRegistered(SourceAdapter().typeId)) {
     Hive.registerAdapter(SourceAdapter());
   }
-
-   
-
-  
 
   runApp(MyApp());
 }
@@ -51,7 +46,8 @@ class MyApp extends StatelessWidget {
           create: (context) => FavouritesBloc(),
         )
       ],
-      child: MaterialApp(
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: ScreenSplash(),
       ),
     );

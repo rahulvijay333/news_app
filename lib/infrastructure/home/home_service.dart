@@ -9,13 +9,10 @@ class HomeService {
   Future<(String?, NewsModel?)> getNewsFromHome(
       {required String category}) async {
     try {
-      final Response response = await   Dio().get(
-          ApiEndPoints.getNewHomeCategory,
+      final Response response = await Dio().get(ApiEndPoints.getNewHomeCategory,
           queryParameters: {'apiKey': apiKey, "category": category});
 
       if (response.statusCode == 200) {
-
-        log('call success 200');
         return (null, NewsModel.fromMap(response.data));
       } else {
         return ('Error occured while connecting to server', null);

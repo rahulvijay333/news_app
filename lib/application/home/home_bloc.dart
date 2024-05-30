@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app_rv/domain/model/news_model.dart';
@@ -18,10 +17,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           await homeService.getNewsFromHome(category: event.catergory);
 
       if (getNews.$1 == null) {
-        log('bloc success');
         emit(HomeSuccess(newList: getNews.$2!));
       } else {
-        log('bloc failed ,  ${getNews.$1}');
         emit(HomeFailure(showError: getNews.$1 ?? 'server down B01'));
       }
     });

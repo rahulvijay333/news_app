@@ -61,6 +61,7 @@ class ScreenMain extends StatelessWidget {
           },
         ),
         appBar: AppBar(
+          surfaceTintColor: Colors.transparent,
           title: const Text(
             'News App',
             style: TextStyle(fontWeight: FontWeight.bold),
@@ -69,6 +70,7 @@ class ScreenMain extends StatelessWidget {
           actions: [
             IconButton(
                 onPressed: () {
+                  //-----------------------------------------------------view favourite navigation
                   BlocProvider.of<FavouritesBloc>(context)
                       .add(GetAllFavorites());
                   Navigator.of(context).push(MaterialPageRoute(
@@ -77,9 +79,9 @@ class ScreenMain extends StatelessWidget {
                     },
                   ));
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.favorite,
-                  color: Colors.red,
+                  color: Colors.red.shade900,
                 ))
           ],
         ),
@@ -89,10 +91,11 @@ class ScreenMain extends StatelessWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
-                    color: Colors.purple.withOpacity(0.2),
+                    color: Colors.purple.withOpacity(0.1),
                     border: Border.all(color: Colors.black.withOpacity(0.2)),
                     borderRadius: BorderRadius.circular(5)),
                 child: TabBar(
+                    indicatorWeight: 0.5,
                     tabAlignment: TabAlignment.start,
                     padding: EdgeInsets.zero,
                     onTap: (index) {
